@@ -203,38 +203,64 @@
           system:
           f {
             inherit system;
-            pkgs = import nixpkgs { inherit system; };
+            pkgs = import nixpkgs {
+              inherit system;
+              overlays = [ (builtins.break self.overlays.default) ];
+            };
           }
         );
     in
     {
       packages = forAllSystems (
-        { system, ... }:
+        { system, pkgs, ... }:
         {
           default = self.packages.${system}.hyprland;
-          inherit (inputs.aquamarine.packages.${system}) aquamarine;
-          inherit (inputs.hyprcursor.packages.${system}) hyprcursor;
-          inherit (inputs.hyprgraphics.packages.${system}) hyprgraphics;
-          inherit (inputs.hypridle.packages.${system}) hypridle;
-          inherit (inputs.hyprland-guiutils.packages.${system}) hyprland-guiutils;
-          inherit (inputs.hyprland.packages.${system}) hyprland;
-          inherit (inputs.hyprland-protocols.packages.${system}) hyprland-protocols;
-          inherit (inputs.hyprland-qt-support.packages.${system}) hyprland-qt-support;
-          inherit (inputs.hyprlang.packages.${system}) hyprlang;
-          inherit (inputs.hyprlauncher.packages.${system}) hyprlauncher;
-          inherit (inputs.hyprlock.packages.${system}) hyprlock;
-          inherit (inputs.hyprpaper.packages.${system}) hyprpaper;
-          inherit (inputs.hyprpicker.packages.${system}) hyprpicker;
-          inherit (inputs.hyprpolkitagent.packages.${system}) hyprpolkitagent;
-          inherit (inputs.hyprsunset.packages.${system}) hyprsunset;
-          inherit (inputs.hyprtoolkit.packages.${system}) hyprtoolkit;
-          inherit (inputs.hyprutils.packages.${system}) hyprutils;
-          inherit (inputs.hyprwayland-scanner.packages.${system}) hyprwayland-scanner;
-          inherit (inputs.hyprwire.packages.${system}) hyprwire;
-          inherit (inputs.xdph.packages.${system}) xdg-desktop-portal-hyprland;
+          inherit (pkgs)
+            hyprland
+            aquamarine
+            hyprcursor
+            hyprgraphics
+            hypridle
+            hypralnd-guiutils
+            hyprland-protocols
+            hyprland-qt-support
+            hyprlang
+            hyprlauncher
+            hyprlock
+            hyprpaper
+            hyprpicker
+            hyprpolkitagent
+            hyprsunset
+            hyprutils
+            hyprwayland-scanner
+            hyprwire
+            xdg-desktop-portal-hyprland
+            ;
+          # inherit (inputs.aquamarine.packages.${system}) aquamarine;
+          # inherit (inputs.hyprcursor.packages.${system}) hyprcursor;
+          # inherit (inputs.hyprgraphics.packages.${system}) hyprgraphics;
+          # inherit (inputs.hypridle.packages.${system}) hypridle;
+          # inherit (inputs.hyprland-guiutils.packages.${system}) hyprland-guiutils;
+          # inherit (inputs.hyprland.packages.${system}) hyprland;
+          # inherit (inputs.hyprland-protocols.packages.${system}) hyprland-protocols;
+          # inherit (inputs.hyprland-qt-support.packages.${system}) hyprland-qt-support;
+          # inherit (inputs.hyprlang.packages.${system}) hyprlang;
+          # inherit (inputs.hyprlauncher.packages.${system}) hyprlauncher;
+          # inherit (inputs.hyprlock.packages.${system}) hyprlock;
+          # inherit (inputs.hyprpaper.packages.${system}) hyprpaper;
+          # inherit (inputs.hyprpicker.packages.${system}) hyprpicker;
+          # inherit (inputs.hyprpolkitagent.packages.${system}) hyprpolkitagent;
+          # inherit (inputs.hyprsunset.packages.${system}) hyprsunset;
+          # inherit (inputs.hyprtoolkit.packages.${system}) hyprtoolkit;
+          # inherit (inputs.hyprutils.packages.${system}) hyprutils;
+          # inherit (inputs.hyprwayland-scanner.packages.${system}) hyprwayland-scanner;
+          # inherit (inputs.hyprwire.packages.${system}) hyprwire;
+          # inherit (inputs.xdph.packages.${system}) xdg-desktop-portal-hyprland;
         }
-        // inputs.hyprland-plugins.packages.${system}
+        # // inputs.hyprland-plugins.packages.${system}
       );
+
+      overlays = import ./overlays.nix;
 
       formatter = forAllSystems ({ pkgs, ... }: pkgs.nixfmt-tree);
 
