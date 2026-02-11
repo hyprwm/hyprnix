@@ -88,7 +88,9 @@ def write_text(path: Path, content: str) -> None:
         sys.exit(1)
 
 
-def fetch_github_tags(owner: str, repo: str, token: str | None = None) -> list[GitTag] | None:
+def fetch_github_tags(
+    owner: str, repo: str, token: str | None = None
+) -> list[GitTag] | None:
     """Fetch version tags from GitHub API. Returns None on rate limit, empty list on other errors."""
     url = f"https://api.github.com/repos/{owner}/{repo}/tags"
 
@@ -259,6 +261,11 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Enable verbose output for debugging failed requests",
     )
+    _ = parser.add_argument(
+        "--no-backup",
+        action="store_true",
+        help="Disable creation of backup files before modification",
+    )
 
     parsed = parser.parse_args()
     parsed.update_all = parsed.update_all or not parsed.update
@@ -342,7 +349,9 @@ def main() -> None:
             print("  [=] Up to date")
 
     if rate_limited_repos:
-        print(f"\n[!] Rate limited on {len(rate_limited_repos)} repo(s): {', '.join(sorted(rate_limited_repos))}")
+        print(
+            f"\n[!] Rate limited on {len(rate_limited_repos)} repo(s): {', '.join(sorted(rate_limited_repos))}"
+        )
         print("[!] Use --token to provide a GitHub PAT to bypass rate limits.")
 
     if not results:
@@ -353,9 +362,11 @@ def main() -> None:
     for r in results:
         print(f"  - {r.input_name}: {r.old_version} -> {r.new_version}")
 
-    backup = create_backup(FLAKE_NIX_PATH)
-    if backup:
-        print(f"[+] Backup created: {backup.name}")
+    backup = None
+    if not args.no_backup:
+        backup = create_backup(FLAKE_NIX_PATH)
+        if backup:
+            print(f"[+] Backup created: {backup.name}")
 
     write_text(FLAKE_NIX_PATH, flake_nix_content)
     print("[+] flake.nix updated successfully")
