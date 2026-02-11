@@ -80,7 +80,6 @@
       url = "github:hyprwm/hyprland-qt-support/v0.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
-      inputs.hyprlang.follows = "hyprlang";
     };
 
     hyprlang = {
@@ -209,23 +208,23 @@
     };
   };
 
-  outputs =
-    inputs@{ self, nixpkgs, ... }:
-    let
-      systems = import inputs.systems;
-      forAllSystems =
-        f:
-        nixpkgs.lib.genAttrs systems (
-          system:
+  outputs = inputs @ {
+    self,
+    nixpkgs,
+    ...
+  }: let
+    systems = import inputs.systems;
+    forAllSystems = f:
+      nixpkgs.lib.genAttrs systems (
+        system:
           f {
             inherit system;
-            pkgs = import nixpkgs { inherit system; };
+            pkgs = import nixpkgs {inherit system;};
           }
-        );
-    in
-    {
-      packages = forAllSystems (
-        { system, ... }:
+      );
+  in {
+    packages = forAllSystems (
+      {system, ...}:
         {
           default = self.packages.${system}.hyprland;
           inherit (inputs.aquamarine.packages.${system}) aquamarine;
@@ -252,10 +251,10 @@
           inherit (inputs.xdph.packages.${system}) xdg-desktop-portal-hyprland;
         }
         // inputs.hyprland-plugins.packages.${system}
-      );
+    );
 
-      formatter = forAllSystems ({ pkgs, ... }: pkgs.nixfmt-tree);
+    formatter = forAllSystems ({pkgs, ...}: pkgs.nixfmt-tree);
 
-      checks = self.packages;
-    };
+    checks = self.packages;
+  };
 }
