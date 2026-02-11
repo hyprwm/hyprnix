@@ -52,4 +52,4 @@ $ python3 update.py --update hyprland --update hyprlang
 $ python3 update.py
 ```
 
-If you get rate-limited, pass an access token via `--token`.
+If you get rate-limited, pass an access token via `--token`. If you use `gh`, you can get it by running `gh auth token`.
