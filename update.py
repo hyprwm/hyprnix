@@ -233,7 +233,8 @@ def parse_args() -> argparse.Namespace:
     _ = parser.add_argument(
         "--update",
         metavar="INPUT",
-        help="Update a specific input (e.g., hyprland)",
+        action="append",
+        help="Update a specific input (e.g., hyprland). Can be specified multiple times.",
     )
     _ = parser.add_argument(
         "--update-all",
@@ -289,12 +290,13 @@ def main() -> None:
         sys.exit(1)
 
     if args.update:
-        if args.update not in hypr_inputs:
-            print(f"[!] Input '{args.update}' not found in flake.nix")
+        invalid_inputs = [u for u in args.update if u not in hypr_inputs]
+        if invalid_inputs:
+            print(f"[!] Input(s) not found in flake.nix: {', '.join(invalid_inputs)}")
             print(f"Available inputs: {', '.join(sorted(hypr_inputs.keys()))}")
             sys.exit(1)
-        hypr_inputs = {args.update: hypr_inputs[args.update]}
-        print(f"[+] Updating specific input: {args.update}")
+        hypr_inputs = {u: hypr_inputs[u] for u in args.update}
+        print(f"[+] Updating specific input(s): {', '.join(args.update)}")
     else:
         print(f"[+] Found {len(hypr_inputs)} Hyprland ecosystem inputs")
 
