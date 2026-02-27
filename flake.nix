@@ -38,7 +38,7 @@
     };
 
     hyprland = {
-      url = "github:hyprwm/hyprland/v0.53.3";
+      url = "github:hyprwm/hyprland/v0.54.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.aquamarine.follows = "aquamarine";
@@ -84,7 +84,7 @@
     };
 
     hyprlang = {
-      url = "github:hyprwm/hyprlang/v0.6.7";
+      url = "github:hyprwm/hyprlang/v0.6.8";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprutils.follows = "hyprutils";
@@ -114,7 +114,7 @@
     };
 
     hyprpaper = {
-      url = "github:hyprwm/hyprpaper/v0.8.1";
+      url = "github:hyprwm/hyprpaper/v0.8.3";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.aquamarine.follows = "aquamarine";
