@@ -250,5 +250,14 @@
     formatter = forAllSystems ({pkgs, ...}: pkgs.nixfmt-tree);
 
     checks = self.packages;
-  };
+
+    overlays.default =
+      with nixpkgs.lib;
+      (composeManyExtensions (
+        mapAttrsToList (input: _: inputs.${input}.overlays.default) (
+          filterAttrs (name: _: name != "self" && name != "nixpkgs" && name != "systems") inputs
+        )
+      ));
+    };
+
 }
