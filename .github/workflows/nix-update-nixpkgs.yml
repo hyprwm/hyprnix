@@ -1,0 +1,23 @@
+name: Update Nixpkgs
+
+on:
+  schedule:
+    # Run every Sunday at midnight
+    - cron: "0 0 * * 0"
+
+jobs:
+  update:
+    if: github.repository == 'hyprwm/hyprnix'
+    name: inputs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Nix
+        uses: hyprwm/actions/.github/actions/nix-setup.yaml@main
+
+      - name: Update Nixpkgs
+        run: update-nixpkgs.sh
+
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "[gha] Update nixpkgs"
