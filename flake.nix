@@ -65,11 +65,6 @@
       inputs.hyprwayland-scanner.follows = "hyprwayland-scanner";
     };
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins/v0.53.0";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     hyprland-protocols = {
       url = "github:hyprwm/hyprland-protocols/v0.7.0";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -250,7 +245,6 @@
           inherit (inputs.hyprwire.packages.${system}) hyprwire;
           inherit (inputs.xdph.packages.${system}) xdg-desktop-portal-hyprland;
         }
-        // inputs.hyprland-plugins.packages.${system}
     );
 
     formatter = forAllSystems ({pkgs, ...}: pkgs.nixfmt-tree);
