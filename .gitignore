@@ -1,0 +1,5 @@
+# Nix
+/.direnv/
+
+# Update Script
+flake.nix.backup*
