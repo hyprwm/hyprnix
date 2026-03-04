@@ -11,6 +11,12 @@ jobs:
     name: inputs
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Nix
+        uses: hyprwm/actions/.github/actions/nix-setup.yaml@main
+
       - name: Update Inputs
         run: update.py
 
