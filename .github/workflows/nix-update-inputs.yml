@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Nix
-        uses: hyprwm/actions/.github/actions/nix-setup.yaml@main
+        uses: hyprwm/actions/nix-setup@main
 
       - name: Update Inputs
         run: update.py
