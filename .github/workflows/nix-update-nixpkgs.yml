@@ -18,7 +18,7 @@ jobs:
         uses: hyprwm/actions/nix-setup@main
 
       - name: Update Nixpkgs
-        run: update-nixpkgs.sh
+        run: ./update-nixpkgs.sh
 
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -18,7 +18,7 @@ jobs:
         uses: hyprwm/actions/nix-setup@main
 
       - name: Update Inputs
-        run: update.py
+        run: ./update.py
 
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v5
