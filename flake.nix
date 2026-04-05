@@ -21,7 +21,7 @@
     };
 
     hyprgraphics = {
-      url = "github:hyprwm/hyprgraphics/v0.5.0";
+      url = "github:hyprwm/hyprgraphics/v0.5.1";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprutils.follows = "hyprutils";
