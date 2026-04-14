@@ -98,7 +98,7 @@
     };
 
     hyprlock = {
-      url = "github:hyprwm/hyprlock/v0.9.3";
+      url = "github:hyprwm/hyprlock/v0.9.4";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprgraphics.follows = "hyprgraphics";
