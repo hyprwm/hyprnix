@@ -85,7 +85,7 @@
     };
 
     hyprlauncher = {
-      url = "github:hyprwm/hyprlauncher/v0.1.5";
+      url = "github:hyprwm/hyprlauncher/v0.1.6";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.aquamarine.follows = "aquamarine";
@@ -186,14 +186,14 @@
     };
 
     hyprwire = {
-      url = "github:hyprwm/hyprwire/v0.3.0";
+      url = "github:hyprwm/hyprwire/v0.3.1";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprutils.follows = "hyprutils";
     };
 
     xdph = {
-      url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.3.11";
+      url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.3.12";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprland-protocols.follows = "hyprland-protocols";
