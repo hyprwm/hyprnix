@@ -163,7 +163,7 @@
     };
 
     hyprtoolkit = {
-      url = "github:hyprwm/hyprtoolkit/v0.5.3";
+      url = "github:hyprwm/hyprtoolkit/v0.5.4";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.aquamarine.follows = "aquamarine";
