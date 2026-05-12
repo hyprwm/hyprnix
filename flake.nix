@@ -145,7 +145,7 @@
     };
 
     hyprshutdown = {
-      url = "github:hyprwm/hyprshutdown/v0.1.0";
+      url = "github:hyprwm/hyprshutdown/v0.1.1";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprtoolkit.follows = "hyprtoolkit";
