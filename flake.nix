@@ -153,7 +153,7 @@
     };
 
     hyprsunset = {
-      url = "github:hyprwm/hyprsunset/v0.3.3";
+      url = "github:hyprwm/hyprsunset/v0.4.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprland-protocols.follows = "hyprland-protocols";
