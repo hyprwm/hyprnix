@@ -28,7 +28,7 @@
     };
 
     hypridle = {
-      url = "github:hyprwm/hypridle/v0.1.7";
+      url = "github:hyprwm/hypridle/v0.1.8";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprland-protocols.follows = "hyprland-protocols";
