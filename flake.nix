@@ -6,7 +6,7 @@
     systems.url = "github:nix-systems/default-linux";
 
     aquamarine = {
-      url = "github:hyprwm/aquamarine/v0.10.0";
+      url = "github:hyprwm/aquamarine/v0.14.0";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
       inputs.hyprutils.follows = "hyprutils";
