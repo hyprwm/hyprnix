@@ -223,7 +223,7 @@
       );
   in {
     packages = forAllSystems (
-      {system, ...}: {
+      {system, ...}: rec {
         default = self.packages.${system}.hyprland;
         inherit (inputs.aquamarine.packages.${system}) aquamarine;
         inherit (inputs.hyprcursor.packages.${system}) hyprcursor;
@@ -246,7 +246,9 @@
         inherit (inputs.hyprutils.packages.${system}) hyprutils;
         inherit (inputs.hyprwayland-scanner.packages.${system}) hyprwayland-scanner;
         inherit (inputs.hyprwire.packages.${system}) hyprwire;
-        inherit (inputs.xdph.packages.${system}) xdg-desktop-portal-hyprland;
+        xdg-desktop-portal-hyprland = inputs.xdph.packages.${system}.xdg-desktop-portal-hyprland.override {
+          inherit hyprland hyprland-protocols hyprlang hyprutils hyprwayland-scanner;
+        };
       }
     );
 
