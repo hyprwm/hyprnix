@@ -1,5 +1,7 @@
 # Nix
 /.direnv/
+/result
+/result-man
 
 # Update Script
 flake.nix.backup*

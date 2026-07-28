@@ -158,8 +158,8 @@ def current_version(flake_lock: dict[str, Any], input_name: str) -> str | None:
 def parse_hypr_inputs(flake_nix_content: str) -> dict[str, str]:
     """Extract hyprwm inputs from flake.nix content."""
     pattern = re.compile(
-        r"([A-Za-z0-9_-]+)\s*=\s*\{.*?url\s*=\s*\"github:hyprwm/([^/]+)/([^\"]+)\".*?\}",
-        re.DOTALL,
+        r'^\s*([A-Za-z0-9_-]+)\.url\s*=\s*"github:hyprwm/([^/\"]+)/([^\"]+)"',
+        re.MULTILINE,
     )
 
     inputs: dict[str, str] = {}
@@ -177,11 +177,13 @@ def update_flake_nix_url(
 ) -> str:
     """Update a URL in flake.nix for a specific input."""
     escaped_name = re.escape(input_name)
+    escaped_repo = re.escape(repo_name)
     prefix = (
-        rf'(\s+{escaped_name}\s*=\s*\{{\s+url\s*=\s*)"github:hyprwm/{repo_name}/[^"]+"'
+        rf'(^\s*{escaped_name}\.url\s*=\s*)'
+        rf'"github:hyprwm/{escaped_repo}/[^"]+"'
     )
     replacement = rf'\1"github:hyprwm/{repo_name}/{new_version}"'
-    return re.sub(prefix, replacement, content)
+    return re.sub(prefix, replacement, content, flags=re.MULTILINE)
 
 
 def create_backup(path: Path) -> Path | None:
