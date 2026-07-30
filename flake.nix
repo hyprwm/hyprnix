@@ -196,7 +196,7 @@
       hyprutils.follows = "hyprutils";
     };
 
-    xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.4.0";
+    xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.4.1";
     xdph.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
