@@ -180,7 +180,7 @@
     };
 
     hyprwayland-scanner = {
-      url = "github:hyprwm/hyprwayland-scanner/v0.4.5";
+      url = "github:hyprwm/hyprwayland-scanner/v0.4.6";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
