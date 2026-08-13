@@ -174,7 +174,7 @@
     };
 
     hyprutils = {
-      url = "github:hyprwm/hyprutils/v0.14.0";
+      url = "github:hyprwm/hyprutils/v0.14.1";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
