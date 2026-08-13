@@ -37,7 +37,7 @@
       hyprwayland-scanner.follows = "hyprwayland-scanner";
     };
 
-    hyprland.url = "github:hyprwm/hyprland/v0.56.1";
+    hyprland.url = "github:hyprwm/hyprland/v0.56.2";
     hyprland.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -177,7 +177,7 @@
       hyprwayland-scanner.follows = "hyprwayland-scanner";
     };
 
-    hyprutils.url = "github:hyprwm/hyprutils/v0.14.0";
+    hyprutils.url = "github:hyprwm/hyprutils/v0.14.1";
     hyprutils.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
