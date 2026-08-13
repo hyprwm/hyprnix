@@ -207,59 +207,73 @@
     };
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    ...
-  }: let
-    systems = import inputs.systems;
-    forAllSystems = f:
-      nixpkgs.lib.genAttrs systems (
-        system:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      ...
+    }:
+    let
+      systems = import inputs.systems;
+      forAllSystems =
+        f:
+        nixpkgs.lib.genAttrs systems (
+          system:
           f {
             inherit system;
-            pkgs = import nixpkgs {inherit system;};
+            pkgs = import nixpkgs {
+              inherit system;
+              overlays = [ self.overlays.default ];
+            };
           }
+        );
+    in
+    {
+      packages = forAllSystems (
+        {
+          system,
+          pkgs,
+          ...
+        }:
+        {
+          default = pkgs.hyprland;
+          inherit (pkgs)
+            aquamarine
+            hyprcursor
+            hyprgraphics
+            hypridle
+            hyprland-guiutils
+            hyprland
+            hyprland-protocols
+            hyprland-qt-support
+            hyprlang
+            hyprlauncher
+            hyprlock
+            hyprpaper
+            hyprpicker
+            hyprpolkitagent
+            hyprpwcenter
+            hyprshutdown
+            hyprsunset
+            hyprtoolkit
+            hyprutils
+            hyprwayland-scanner
+            hyprwire
+            xdg-desktop-portal-hyprland
+            ;
+        }
       );
-  in {
-    packages = forAllSystems (
-      {system, ...}: rec {
-        default = self.packages.${system}.hyprland;
-        inherit (inputs.aquamarine.packages.${system}) aquamarine;
-        inherit (inputs.hyprcursor.packages.${system}) hyprcursor;
-        inherit (inputs.hyprgraphics.packages.${system}) hyprgraphics;
-        inherit (inputs.hypridle.packages.${system}) hypridle;
-        inherit (inputs.hyprland-guiutils.packages.${system}) hyprland-guiutils;
-        inherit (inputs.hyprland.packages.${system}) hyprland;
-        inherit (inputs.hyprland-protocols.packages.${system}) hyprland-protocols;
-        inherit (inputs.hyprland-qt-support.packages.${system}) hyprland-qt-support;
-        inherit (inputs.hyprlang.packages.${system}) hyprlang;
-        inherit (inputs.hyprlauncher.packages.${system}) hyprlauncher;
-        inherit (inputs.hyprlock.packages.${system}) hyprlock;
-        inherit (inputs.hyprpaper.packages.${system}) hyprpaper;
-        inherit (inputs.hyprpicker.packages.${system}) hyprpicker;
-        inherit (inputs.hyprpolkitagent.packages.${system}) hyprpolkitagent;
-        inherit (inputs.hyprpwcenter.packages.${system}) hyprpwcenter;
-        inherit (inputs.hyprshutdown.packages.${system}) hyprshutdown;
-        inherit (inputs.hyprsunset.packages.${system}) hyprsunset;
-        inherit (inputs.hyprtoolkit.packages.${system}) hyprtoolkit;
-        inherit (inputs.hyprutils.packages.${system}) hyprutils;
-        inherit (inputs.hyprwayland-scanner.packages.${system}) hyprwayland-scanner;
-        inherit (inputs.hyprwire.packages.${system}) hyprwire;
-        xdg-desktop-portal-hyprland = inputs.xdph.packages.${system}.xdg-desktop-portal-hyprland.override {
-          inherit hyprland hyprland-protocols hyprlang hyprutils hyprwayland-scanner;
-        };
-      }
-    );
 
-    formatter = forAllSystems ({pkgs, ...}: pkgs.nixfmt-tree);
+      formatter = forAllSystems ({ pkgs, ... }: pkgs.nixfmt-tree);
 
-    checks = self.packages;
+      checks = self.packages;
 
-    overlays.default = with nixpkgs.lib; (composeManyExtensions (
-      mapAttrsToList (input: _: inputs.${input}.overlays.default) (
-        filterAttrs (name: _: name != "self" && name != "nixpkgs" && name != "systems") inputs
-      )
-    ));
-  };
+      overlays.default =
+        with nixpkgs.lib;
+        (composeManyExtensions (
+          mapAttrsToList (input: _: inputs.${input}.overlays.default) (
+            filterAttrs (name: _: name != "self" && name != "nixpkgs" && name != "systems") inputs
+          )
+        ));
+    };
 }
