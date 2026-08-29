@@ -5,7 +5,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     systems.url = "github:nix-systems/default-linux";
 
-    aquamarine.url = "github:hyprwm/aquamarine/v0.14.0";
+    aquamarine.url = "github:hyprwm/aquamarine/v0.15.0";
     aquamarine.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
