@@ -128,7 +128,7 @@
       hyprwayland-scanner.follows = "hyprwayland-scanner";
     };
 
-    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent/v0.1.3";
+    hyprpolkitagent.url = "github:hyprwm/hyprpolkitagent/v0.2.0";
     hyprpolkitagent.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
