@@ -276,13 +276,33 @@
           self.overlays.hyprland
           self.overlays.glaze
         ];
-        hyprland =
-          with nixpkgs.lib;
-          (composeManyExtensions (
-            mapAttrsToList (input: _: inputs.${input}.overlays.default) (
-              filterAttrs (name: _: name != "self" && name != "nixpkgs" && name != "systems") inputs
-            )
-          ));
+
+        hyprland = nixpkgs.lib.composeManyExtensions [
+          inputs.hyprland.overlays.default
+          inputs.hypridle.overlays.default
+          inputs.hyprlauncher.overlays.default
+          inputs.hyprlock.overlays.default
+          inputs.hyprpaper.overlays.default
+          inputs.hyprpicker.overlays.default
+          inputs.hyprpolkitagent.overlays.default
+          inputs.hyprpwcenter.overlays.default
+          inputs.hyprshutdown.overlays.default
+          inputs.hyprsunset.overlays.default
+
+          # Libraries
+          inputs.hyprland-guiutils.overlays.default # depends aquamarine, graphics, lang, utils, toolkit, w-s
+          inputs.hyprtoolkit.overlays.default # depends aquamarine, graphics, lang, utils, w-s
+          inputs.xdph.overlays.default # depends lang, protocols, utils, w-s
+          inputs.hyprcursor.overlays.default # depends lang
+          inputs.hyprland-qt-support.overlays.default # depends lang
+          inputs.aquamarine.overlays.default # depends utils, w-s
+          inputs.hyprgraphics.overlays.default # depends utils
+          inputs.hyprlang.overlays.default # depends utils
+          inputs.hyprwire.overlays.default # depends utils
+          inputs.hyprwayland-scanner.overlays.default # No deps
+          inputs.hyprutils.overlays.default # No deps
+          inputs.hyprland-protocols.overlays.default # No deps
+        ];
 
         # TODO: remove when 0.57 is released
         glaze = final: prev: {
