@@ -239,7 +239,7 @@
           ...
         }:
         {
-          default = pkgs.hyprland.override { inherit (pkgs) glaze-hyprland; };
+          default = pkgs.hyprland;
           inherit (pkgs)
             aquamarine
             hyprcursor
@@ -274,7 +274,6 @@
       overlays = {
         default = nixpkgs.lib.composeManyExtensions [
           self.overlays.hyprland
-          self.overlays.glaze
         ];
 
         hyprland = nixpkgs.lib.composeManyExtensions [
@@ -303,20 +302,6 @@
           inputs.hyprutils.overlays.default # No deps
           inputs.hyprland-protocols.overlays.default # No deps
         ];
-
-        # TODO: remove when 0.57 is released
-        glaze = final: prev: {
-          glaze-hyprland = prev.glaze-hyprland.overrideAttrs {
-            version = "7.9.1"; # satisfies Hyprland's `find_package(glaze 7...<8)`
-            src = prev.fetchFromGitHub {
-              owner = "stephenberry";
-              repo = "glaze";
-              rev = "v7.9.1";
-              hash = "sha256-NRRq5MGF2f5PW0teYnq58ELzson+U6KHVPaY6r30KLA=";
-            };
-          };
-          hyprland = prev.hyprland.override { inherit (final) glaze-hyprland; };
-        };
       };
     };
 }
