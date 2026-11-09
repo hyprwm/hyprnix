@@ -2,8 +2,8 @@
   description = "Hypr* ecosystem stable release flakes";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    systems.url = "github:nix-systems/default-linux";
+    nixpkgs.follows = "hyprland/nixpkgs";
+    systems.follows = "hyprland/systems";
 
     aquamarine.url = "github:hyprwm/aquamarine/v0.16.0";
     aquamarine.inputs = {
@@ -13,7 +13,7 @@
       hyprwayland-scanner.follows = "hyprwayland-scanner";
     };
 
-    hyprcursor.url = "github:hyprwm/hyprcursor/e4ed7c08123df5af460a0a70961380cbfb872f76";
+    hyprcursor.url = "github:hyprwm/hyprcursor/v0.1.14";
     hyprcursor.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -27,7 +27,8 @@
       hyprutils.follows = "hyprutils";
     };
 
-    hypridle.url = "github:hyprwm/hypridle/aa958ed7ad4863860b93ecd7189419e193bfae2c";
+    # FIXME: pin once GCC 15 -> 16 releases
+    hypridle.url = "github:hyprwm/hypridle/39792ac3fac61b37be41c057bf46146ec21cf8fa";
     hypridle.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -39,21 +40,21 @@
 
     hyprland.url = "github:hyprwm/hyprland/v0.57.2";
     hyprland.inputs = {
-      nixpkgs.follows = "nixpkgs";
-      systems.follows = "systems";
       aquamarine.follows = "aquamarine";
       hyprcursor.follows = "hyprcursor";
       hyprgraphics.follows = "hyprgraphics";
       hyprland-guiutils.follows = "hyprland-guiutils";
       hyprland-protocols.follows = "hyprland-protocols";
       hyprlang.follows = "hyprlang";
+      hyprtoolkit.follows = "hyprtoolkit";
       hyprutils.follows = "hyprutils";
       hyprwayland-scanner.follows = "hyprwayland-scanner";
       hyprwire.follows = "hyprwire";
       xdph.follows = "xdph";
     };
 
-    hyprland-guiutils.url = "github:hyprwm/hyprland-guiutils/4c30cf3097ea963c0e250749ee0c59f8b08816d6";
+    # FIXME: pin once GCC 15 -> 16 releases
+    hyprland-guiutils.url = "github:hyprwm/hyprland-guiutils/d038577531e3ab6646b13a82d17e610be34c30cc";
     hyprland-guiutils.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -77,6 +78,7 @@
       systems.follows = "systems";
     };
 
+    # FIXME: pin once GCC 15 -> 16 releases
     hyprlang.url = "github:hyprwm/hyprlang/9508458be316a0d70d37ebed1ab725ccd10411ff";
     hyprlang.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -84,7 +86,7 @@
       hyprutils.follows = "hyprutils";
     };
 
-    hyprlauncher.url = "github:hyprwm/hyprlauncher/487fd4b174fd795f5dba3fdaa2b059eca1bcf7f7";
+    hyprlauncher.url = "github:hyprwm/hyprlauncher/v0.1.7";
     hyprlauncher.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -139,7 +141,8 @@
       hyprutils.follows = "hyprutils";
     };
 
-    hyprpwcenter.url = "github:hyprwm/hyprpwcenter/c31c45734f8e9e9f85fc3a42a52ea896e515e9e4";
+    # FIXME: pin once GCC 15 -> 16 releases
+    hyprpwcenter.url = "github:hyprwm/hyprpwcenter/b6ed8a7f20cf117479c0c4631f56e96f0cb6f0a1";
     hyprpwcenter.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -159,7 +162,8 @@
       hyprutils.follows = "hyprutils";
     };
 
-    hyprsunset.url = "github:hyprwm/hyprsunset/471b385fb772beaaf57460d4fea8deba3f94b65f";
+    # FIXME: pin once GCC 15 -> 16 releases
+    hyprsunset.url = "github:hyprwm/hyprsunset/b5c0b33e78a7a625d858edb0c7f6e3fd127579ba";
     hyprsunset.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
@@ -186,6 +190,7 @@
       systems.follows = "systems";
     };
 
+    # FIXME: pin once GCC 15 -> 16 releases
     hyprwayland-scanner.url = "github:hyprwm/hyprwayland-scanner/62e62c1ca23da17612c6890d4ad2064f575643db";
     hyprwayland-scanner.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -199,12 +204,15 @@
       hyprutils.follows = "hyprutils";
     };
 
-    xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland/9f0e9ff02739cd538d39bd706422dc50e9ca60dd";
+    xdph.url = "github:hyprwm/xdg-desktop-portal-hyprland/v1.5.0";
     xdph.inputs = {
       nixpkgs.follows = "nixpkgs";
       systems.follows = "systems";
+      aquamarine.follows = "aquamarine";
+      hyprgraphics.follows = "hyprgraphics";
       hyprland-protocols.follows = "hyprland-protocols";
       hyprlang.follows = "hyprlang";
+      hyprtoolkit.follows = "hyprtoolkit";
       hyprutils.follows = "hyprutils";
       hyprwayland-scanner.follows = "hyprwayland-scanner";
     };
